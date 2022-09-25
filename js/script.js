@@ -41,6 +41,18 @@ const checkPassword = (pass1, pass2) => {
     }
 }
 
+const checkMail = email => {
+
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if(re.test(email.value)){
+        clearError(email)
+    } else {
+        showError(email, 'Incorrect email')
+    }
+    
+}
+
 sendBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
@@ -48,6 +60,7 @@ sendBtn.addEventListener('click', (event) => {
     checkLength(username, 3)
     checkLength(pass, 8)
     checkPassword(pass, pass2)
+    checkMail(email)
 })
 
 clearBtn.addEventListener('click', (event) => {
