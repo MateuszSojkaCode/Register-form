@@ -29,10 +29,25 @@ const checkForm = input => {
     })
 }
 
+const checkLength = (input, minLength) => {
+    if(input.value.length < minLength) {
+        showError(input, `${input.previousElementSibling.innerText.slice(0, -1)} must have at least ${minLength} characters`)
+    }
+}
+
+const checkPassword = (pass1, pass2) => {
+    if (pass1.value !== pass2.value) {
+        showError(pass2, 'Password dosen\'t match')
+    }
+}
+
 sendBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
     checkForm([username, pass, pass2, email])
+    checkLength(username, 3)
+    checkLength(pass, 8)
+    checkPassword(pass, pass2)
 })
 
 clearBtn.addEventListener('click', (event) => {
